@@ -1,5 +1,5 @@
 <template>
-  <img src="./assets/frog.jpg" alt="Frog" />
+  <img src="./assets/frog2.jpg" alt="Frog" />
 </template>
 
 <script setup>

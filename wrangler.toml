@@ -1,0 +1,10 @@
+name = "frog-site"
+account_id = "<YOUR_ACCOUNT_ID>"  # replace with your Cloudflare account ID
+compatibility_date = "2025-04-25"
+
+[site]
+  bucket = "dist"
+  entry-point = "."
+
+[build]
+  command = "pnpm run build"
