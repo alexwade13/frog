@@ -1,11 +1,46 @@
 <template>
-  <img src="./assets/frog2.jpg" alt="Frog" />
+
+    <img :src="selectedImage" alt="Frog" class="frog-image" @error="handleImageError" />
+  
 </template>
 
 <script setup>
-// No script needed
-</script>
+import { ref, onMounted } from 'vue';
 
-<style scoped>
-/* No styles needed, image only */
-</style>
+const selectedImage = ref('');
+const imageList = [];
+
+// Dynamically import all images from the frogs directory
+const loadImages = async () => {
+  const modules = import.meta.glob('./assets/frogs/*.{jpg,jpeg,png,gif}');
+  
+  for (const path in modules) {
+    try {
+      const module = await modules[path]();
+      imageList.push(module.default);
+    } catch (e) {
+      console.error(`Error loading image ${path}:`, e);
+    }
+  }
+  
+  selectRandomImage();
+};
+
+const selectRandomImage = () => {
+  if (imageList.length > 0) {
+    selectedImage.value = imageList[Math.floor(Math.random() * imageList.length)];
+    console.log('Selected image:', selectedImage.value);
+  } else {
+    console.warn('No images found in the frogs directory');
+  }
+};
+
+const handleImageError = () => {
+  console.error('Failed to load image:', selectedImage.value);
+  selectRandomImage(); // Try another image if one fails to load
+};
+
+onMounted(() => {
+  loadImages();
+});
+</script>
