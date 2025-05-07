@@ -44,3 +44,23 @@ onMounted(() => {
   loadImages();
 });
 </script>
+
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.frog-image {
+  max-width: 100%;
+  max-height: 100vh;
+  display: block;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>
